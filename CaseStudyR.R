@@ -122,8 +122,8 @@ dataC5<-dataC5[,-c(1)]
 rm(data.pred2,data.pred3,data.pred4)
 
 #ACE and P(ICE>0)
-ACEs<-sapply(unique(dataI$nID),function(x){mean(dataI[dataI$nID==x,]$ICE)})
-Ps<-sapply(unique(dataI$nID),function(x){length(which(dataI[dataI$nID==x,]$ICE>0))/length(which(dataI$nID==x))})
+Ps<-aggregate(ICE~nID,dataI,function(x){length(which(x>0))/length(x)})[,2]
+ACEs<-aggregate(ICE~nID,dataI,mean)[,2]
 
 
 #ICE distribution
